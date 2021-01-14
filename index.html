@@ -1,0 +1,184 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta name=viewport content="width=device-width, initial-scale=1">
+		<title>Match Checker</title>
+		<link rel="stylesheet" type="text/css" href="checker.css"> 
+	</head>
+
+	<body id="body" background="bg2.jpg">
+		<script>
+		
+		function check() {
+			var boy_age = document.myForm.bAge.value;
+			var gal_age = document.myForm2.gAge.value;
+			
+			if(boy_age == gal_age) {
+				var match_point = 10;
+			}
+			else if (boy_age > gal_age) {
+				var match_point = 7;
+				var age_dif = boy_age - gal_age;
+				if(age_dif >= 8) {
+					match_point -= 2;
+				}
+				else {
+					match_point += 2;
+				}
+			}
+			else {
+				var match_point = -7;
+				var age_dif = gal_age - boy_age;
+				if(age_dif >= 8) {
+					match_point -= 3;
+				}
+				else {
+					match_point += 3;
+				}
+			}
+			
+			var boy_height = document.myForm.bHeight.value;
+			var gal_height = document.myForm2.gHeight.value;
+			
+			if (boy_height == gal_height) {
+				match_point -= 5;
+			}
+			else if (boy_height > gal_height) {
+				match_point += 10;
+			}
+			else {
+				match_point -= 4;
+				var height_dif = gal_height - boy_height;
+				if (height_dif >= 1.5) {
+					match_point -= 5;
+				}else {
+					match_point -= 4;
+				}
+			}
+			
+			var boy_name = document.myForm.bName.value;
+			var gal_name = document.myForm2.gName.value;
+			
+			
+			
+			var rates = document.getElementsByName('weight_radio');
+			var rate_value;
+			for(var i = 0; i < rates.length; i++){
+				if(rates[i].checked){
+					rate_value = rates[i].value;
+				}
+			}
+			
+			var ratesGal = document.getElementsByName('weight_radio2');
+			var rateGal_value;
+			for(var i = 0; i < ratesGal.length; i++){
+				if(ratesGal[i].checked){
+					rateGal_value = ratesGal[i].value;
+				}
+			}
+			
+			if(rate_value == rateGal_value){
+				match_point += 10;
+			}
+			else{
+				match_point += 0;
+			}
+			
+			rateGal_value = parseInt(rateGal_value, 10);
+			rate_value = parseInt(rate_value, 10);
+			
+			var big  = rate_value + rateGal_value;
+			
+			switch(big){
+				case 110:
+					match_point += 5;
+				case 1100:
+					match_point += 5;
+				case 1010:
+					match_point -= 5;
+			}
+			
+			
+			if (match_point > 10) {
+				document.getElementById('paste').innerHTML = boy_name + " and " + gal_name + " is a perfect match";
+				alert(boy_name + " and " + gal_name + " is a perfect match");
+			}
+			
+			else {
+				document.getElementById('paste').innerHTML = boy_name + " and " + gal_name + " is not a perfect match";
+				alert(boy_name + " and " + gal_name + " is not a perfect match");
+			}
+			
+			document.getElementById('match_point').innerHTML = match_point + " "  + big
+			
+			
+		}
+		
+			
+			
+			
+			
+		</script>
+		
+		
+		<form name="myForm" class="boy-form">
+			<input name="bName" type="text" placeholder="Name">
+			<input name="bAge" type="number" placeholder="Age">
+			<input name="bHeight" type="number" placeholder="Height">
+			<div class=weight_radio_group>
+				<input name="weight_radio" type="radio" value="10" class="weight_radio">
+				<label class="leb">Fat</label>
+				<input name="weight_radio" type="radio" value="100" class="weight_radio">
+				<label class="leb">Regular</label>
+				<input name="weight_radio" type="radio" value="1000" class="weight_radio">
+				<label class="leb">Skiny</label>
+			</div>
+		</form>	
+		<form name="myForm2" class="gal-form">
+			<input name="gName" type="text" placeholder="Name">
+			<input name="gAge" type="number" placeholder="Age">
+			<input name="gHeight" type="number" placeholder="Height">
+			<div class=weight_radio_group>
+				<input name="weight_radio2" type="radio" value="10" class="weight_radio">
+				<label class="leb">Fat</label>
+				<input name="weight_radio2" type="radio" value="100" class="weight_radio">
+				<label class="leb">Regular</label>
+				<input name="weight_radio2" type="radio" value="1000" class="weight_radio">
+				<label class="leb">Skiny</label>
+			</div>
+		</form>	
+		
+		<div id="paste"></div>
+		<input type="button" value="Check" onclick="check()" class="check-btn">
+		
+		
+		<div class=rights>
+			<p> &copy; 2020, SmartAss. All rights reversed</p>
+		</div>
+	</body>
+	
+</html>
+<!-----
+if (document.getElementById('r1').checked) {
+  rate_value = document.getElementById('r1').value;
+}
+
+============================================
+<form id="test">
+<label><input type="radio" name="test" value="A"> A</label>
+<label><input type="radio" name="test" value="B" checked> B</label>
+<label><input type="radio" name="test" value="C"> C</label>
+</form>
+var form = document.getElementById("test");
+alert(form.elements["test"].value);
+
+================================================
+var rates = document.getElementsByName('rate');
+var rate_value;
+for(var i = 0; i < rates.length; i++){
+    if(rates[i].checked){
+        rate_value = rates[i].value;
+    }
+}
+=====================================================
